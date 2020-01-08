@@ -1,9 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  entry: {
-    main: "./src/js/index.js",
-  },
+  entry: ["@babel/polyfill", "./src/js/index.js"],
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
@@ -21,4 +19,5 @@ module.exports = {
       },
     ],
   },
+  devtool: "source-map",
 };
