@@ -1,10 +1,11 @@
 const path = require("path");
 
 module.exports = {
-  entry: ["@babel/polyfill", "./src/js/index.js"],
+  entry: ["@babel/polyfill", "./src/js/index.js", "./src/sass/style.scss"],
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    publicPath: "dist",
+    path: path.join(__dirname, "dist"),
   },
   module: {
     rules: [
@@ -22,6 +23,11 @@ module.exports = {
         test: /\.css$/,
         exclude: /node_modules/,
         use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
     ],
   },
