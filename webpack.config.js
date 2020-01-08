@@ -1,4 +1,5 @@
 const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: ["@babel/polyfill", "./src/js/index.js", "./src/sass/style.scss"],
@@ -7,6 +8,7 @@ module.exports = {
     publicPath: "dist",
     path: path.join(__dirname, "dist"),
   },
+  plugins: [new MiniCssExtractPlugin({ filename: "css/style.css" })],
   module: {
     rules: [
       {
@@ -27,7 +29,7 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
     ],
   },
