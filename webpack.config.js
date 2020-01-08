@@ -10,6 +10,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {
@@ -17,7 +18,19 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: ["style-loader", "css-loader"],
+      },
     ],
   },
   devtool: "source-map",
+  devServer: {
+    contentBase: "./",
+    host: "localhost",
+    hot: true,
+    port: 9000,
+    open: true,
+  },
 };
