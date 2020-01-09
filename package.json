@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode development",
-    "server": "webpack-dev-server"
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -19,20 +19,33 @@
   "homepage": "https://github.com/enistudy/hj-webpack-practice#readme",
   "devDependencies": {
     "@babel/core": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "@svgr/webpack": "^5.0.1",
+    "@types/node": "^13.1.5",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
     "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.4.1",
+    "dotenv-webpack": "^1.7.0",
+    "file-loader": "^5.0.2",
+    "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.1.2",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.4",
+    "url-loader": "^3.0.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.7.0"
+    "@babel/polyfill": "^7.7.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   }
 }

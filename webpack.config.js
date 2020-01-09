@@ -1,27 +1,34 @@
 const path = require("path");
+const Dotenv = require("dotenv-webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  entry: ["@babel/polyfill", "./src/js/index.js", "./src/ts/index.ts", "./src/sass/style.scss"],
+  entry: ["@babel/polyfill", "./src/index.tsx"],
   output: {
-    filename: "bundle.js",
-    publicPath: "dist",
+    filename: "bundle.[hash].js",
     path: path.join(__dirname, "dist"),
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".tsx", ".ts", "jsx", ".js"],
   },
-  plugins: [new MiniCssExtractPlugin({ filename: "css/style.css" })],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({ filename: "css/style.css" }),
+    new HtmlWebpackPlugin({
+      template: "public/index.html",
+      favicon: "public/favicon.ico",
+    }),
+    new Dotenv(),
+  ],
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
-          },
         },
       },
       {
@@ -39,14 +46,33 @@ module.exports = {
         exclude: /node_modules/,
         use: "ts-loader",
       },
+      {
+        test: /\.svg$/i,
+        use: [
+          {
+            loader: "@svgr/webpack",
+          },
+        ],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: {
+          loader: "url-loader",
+          options: {
+            limit: 8192,
+          },
+        },
+      },
     ],
   },
-  devtool: "source-map",
+  devtool: "inline-source-map",
   devServer: {
-    contentBase: "./",
+    contentBase: "./dist",
     host: "localhost",
     hot: true,
     port: 9000,
     open: true,
+    historyApiFallback: true,
   },
+  mode: "development",
 };
